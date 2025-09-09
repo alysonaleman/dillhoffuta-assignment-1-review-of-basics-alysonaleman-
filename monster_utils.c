@@ -65,3 +65,43 @@ int write_monsters(char name[MAX_MONSTERS][MAX_STRING],
     fclose(fp);
     return 0;
 }
+
+int parse_monster(char line[MAX_STRING],
+                  char name[MAX_MONSTERS][MAX_STRING],
+                  char type[MAX_MONSTERS][MAX_STRING],
+                  int HP[MAX_MONSTERS],
+                  int AC[MAX_MONSTERS],
+                  int STR[MAX_MONSTERS],
+                  int DEX[MAX_MONSTERS],
+                  int CON[MAX_MONSTERS],
+                  int num_monsters)
+{
+    if (num_monsters >= MAX_MONSTERS) {
+        return 0;
+    }
+
+    char *token;
+    int field = 0;
+
+    char buffer[MAX_STRING];
+    strncpy(buffer, line, MAX_STRING);
+    buffer[MAX_STRING-1] = '\0';
+
+    token = strtok(buffer, ",");
+    while (token != NULL) {
+        switch (field) {
+            case 0: strncpy(name[num_monsters], token, MAX_STRING); break;
+            case 1: strncpy(type[num_monsters], token, MAX_STRING); break;
+            case 2: HP[num_monsters] = atoi(token); break;
+            case 3: AC[num_monsters] = atoi(token); break;
+            case 4: STR[num_monsters] = atoi(token); break;
+            case 5: DEX[num_monsters] = atoi(token); break;
+            case 6: CON[num_monsters] = atoi(token); break;
+            default: break;
+        }
+        field++;
+        token = strtok(NULL, ",");
+    }
+
+    return field;
+}
