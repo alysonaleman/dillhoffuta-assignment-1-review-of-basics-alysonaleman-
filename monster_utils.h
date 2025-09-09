@@ -33,4 +33,14 @@ int parse_monster (char line [MAX_STRING],
                    int CON [ MAX_MONSTERS],
                    int num_monsters );
 
+int search_monsters(char name[MAX_MONSTERS][MAX_STRING],
+                    char type[MAX_MONSTERS][MAX_STRING],
+                    int HP[MAX_MONSTERS],
+                    int AC[MAX_MONSTERS],
+                    int STR[MAX_MONSTERS],
+                    int DEX[MAX_MONSTERS],
+                    int CON[MAX_MONSTERS],
+                    int num_monsters,
+                    char search_term[MAX_STRING]);
+
 #endif

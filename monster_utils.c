@@ -105,3 +105,39 @@ int parse_monster(char line[MAX_STRING],
 
     return field;
 }
+
+int search_monsters(char name[MAX_MONSTERS][MAX_STRING],
+                    char type[MAX_MONSTERS][MAX_STRING],
+                    int HP[MAX_MONSTERS],
+                    int AC[MAX_MONSTERS],
+                    int STR[MAX_MONSTERS],
+                    int DEX[MAX_MONSTERS],
+                    int CON[MAX_MONSTERS],
+                    int num_monsters,
+                    char search_term[MAX_STRING])
+{
+    int found = 0;
+
+    for (int i = 0; i < num_monsters; i++) {
+        char name_lower[MAX_STRING];
+        char term_lower[MAX_STRING];
+
+        strncpy(name_lower, name[i], MAX_STRING);
+        strncpy(term_lower, search_term, MAX_STRING);
+
+        for (int j = 0; name_lower[j]; j++) name_lower[j] = tolower(name_lower[j]);
+        for (int j = 0; term_lower[j]; j++) term_lower[j] = tolower(term_lower[j]);
+
+        if (strstr(name_lower, term_lower) != NULL) {
+            printf("%s (%s), %d HP, %d AC, %d STR, %d DEX, %d CON\n",
+                   name[i], type[i], HP[i], AC[i], STR[i], DEX[i], CON[i]);
+            found = 1;
+        }
+}
+
+if (!found) {
+        printf("No monsters found\n");
+    }
+
+    return found;
+}
